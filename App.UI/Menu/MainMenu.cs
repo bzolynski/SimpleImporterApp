@@ -6,13 +6,18 @@ namespace App.UI.Menu
 {
     public class MainMenu
     {
-        public void Menu()
+        public void MenuText()
         {
-            Console.WriteLine("1: Lista sprzedawców.");
-            Console.WriteLine("2: Lista firm.");
-            Console.WriteLine("3: Lista produktów.");
-            Console.WriteLine("4: Historia zamówień.");
-            Console.WriteLine("5: Złóż zamówienie.");
+            Console.WriteLine("1: Sprzedawcy.");
+            Console.WriteLine("2: Firmy.");
+            Console.WriteLine("3: Produkty.");
+            Console.WriteLine("4: Zamówienia.");
+            Console.WriteLine("0: Zamknij program");
+        }
+
+        public void MenuSwitch()
+        {
+
         }
     }
 }
