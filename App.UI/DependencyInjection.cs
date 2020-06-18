@@ -1,8 +1,10 @@
 ﻿using App.Library.Data;
 using App.Library.Data.DataAccess;
 using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using App.UI.Interfaces;
+using App.UI.Menu;
 using Autofac;
 using Autofac.Builder;
 using System;
@@ -24,11 +26,16 @@ namespace App.UI
             builder.RegisterType<SampleData>().As<ISampleData>();
             builder.RegisterType<Database>().As<IDatabase>().SingleInstance();
 
-            builder.RegisterType<CompanyRepository>().As<IRepository<CompanyModel>>();
-            builder.RegisterType<OrderRepository>().As<IRepository<OrderModel>>();
-            builder.RegisterType<ProductRepository>().As<IRepository<ProductModel>>();
-            builder.RegisterType<SellerRepository>().As<IRepository<SellerModel>>();
+            builder.RegisterType<CompanyRepository>().As<ICompanyRepository>();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<SellerRepository>().As<ISellerRepository>();
 
+            builder.RegisterType<CompanyMenu>().AsSelf();
+            builder.RegisterType<MainMenu>().AsSelf();
+            builder.RegisterType<OrderMenu>().AsSelf();
+            builder.RegisterType<ProductMenu>().AsSelf();
+            builder.RegisterType<SellerMenu>().AsSelf();
 
             return builder.Build();
 

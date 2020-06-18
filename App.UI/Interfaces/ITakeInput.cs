@@ -6,7 +6,9 @@ namespace App.UI.Interfaces
 {
     public interface ITakeInput
     {
-        void MenuOptions();
-        void StringInput();
+        int MenuInput();
+        int IntInput();
+        double DoubleInput();
+        string StringInput();
     }
 }

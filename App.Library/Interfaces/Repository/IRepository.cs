@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Library.Interfaces
+namespace App.Library.Interfaces.Repository
 {
     public interface IRepository<T> where T : class
     {
-        void Create(T company);
         List<T> GetAll();
         T Get(int id);
         void Delete(int id);

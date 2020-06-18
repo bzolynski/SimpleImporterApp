@@ -1,4 +1,5 @@
 ﻿using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
-    public class SellerRepository : IRepository<SellerModel>
+    public class SellerRepository : ISellerRepository
     {
         private readonly IDatabase _database;
 
@@ -18,9 +19,21 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
-        public void Create(SellerModel seller)
+        public void Create(string firstName, string lastName, string email, int companyId)
         {
+            var id = _database.Sellers.Last().Id + 1;
+
+            var seller = new SellerModel
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                CompanyId = companyId
+            };
+
             _database.Sellers.Add(seller);
+            
         }
 
         public List<SellerModel> GetAll()

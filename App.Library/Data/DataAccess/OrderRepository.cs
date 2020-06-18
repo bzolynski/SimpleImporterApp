@@ -1,4 +1,5 @@
 ﻿using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
-    public class OrderRepository : IRepository<OrderModel>
+    public class OrderRepository : IOrderRepository
     {
         private readonly IDatabase _database;
 

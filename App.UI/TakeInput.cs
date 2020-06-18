@@ -7,32 +7,59 @@ namespace App.UI
 {
     public class TakeInput : ITakeInput
     {
-        public void MenuOptions()
+        public int MenuInput()
         {
-            try
-            {
-                var option = int.Parse(Console.ReadLine());
+            Console.Write("Opcja: ");
+            var input = IntInput();
+            Console.WriteLine();
 
-            }
-            catch (Exception)
+            return input;
+        }
+        public int IntInput()
+        {
+            do
             {
-                Console.Write("Błąd: Podaj właściwą opcję: ");
-                MenuOptions();
-            }
+                int number = -1;
+                var input = Console.ReadLine();
+
+                if (int.TryParse(input, out number))
+                    return number;
+                else
+                    Console.Write("Błąd! Podaj liczbę: ");
+
+
+            } while (true);            
         }
 
-        public void StringInput()
+        public double DoubleInput()
         {
-            try
+            do
             {
+                double number = -1.0;
+                Console.Write("Wpisz liczbę: ");
                 var input = Console.ReadLine();
-            }
-            catch (Exception)
-            {
 
-                Console.WriteLine("Coś poszło nie tak, spróbuj ponownie");
-                StringInput();
-            }
+                if (double.TryParse(input, out number))
+                    return number;
+                else
+                    Console.Write("Błąd! Podaj liczbę: ");
+
+
+            } while (true);
+        }
+
+        public string StringInput()
+        {
+            do
+            {                
+                var input = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(input))
+                    return input;
+                else
+                    Console.WriteLine("Pole nie może być psuste. Wpisz jeszcze raz");
+
+            } while (true);
         }
     }
 }

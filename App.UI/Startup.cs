@@ -13,11 +13,13 @@ namespace App.UI
     {
         private readonly ISampleData _sampleData;
         private readonly ITakeInput _takeInput;
+        private readonly MainMenu _mainMenu;
 
-        public Startup(ISampleData sampleData, ITakeInput takeInput)
+        public Startup(ISampleData sampleData, ITakeInput takeInput, MainMenu mainMenu)
         {
             _sampleData = sampleData;
             _takeInput = takeInput;
+            _mainMenu = mainMenu;
         }
 
         public void InitializeDatabase()
@@ -30,9 +32,8 @@ namespace App.UI
         public void Run()
         {
             Console.WriteLine("Witaj w aplikacji importera, wybierz co chcesz zrobić: ");
-            //Menu.TextMenu mainMenu = new Menu.TextMenu();
-            mainMenu.MainMenu();
-            _takeInput.MenuOptions();
+
+            _mainMenu.Initialize();
         }
     }
 }

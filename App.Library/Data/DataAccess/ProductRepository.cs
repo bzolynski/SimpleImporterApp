@@ -1,4 +1,5 @@
 ﻿using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
-    public class ProductRepository : IRepository<ProductModel>
+    public class ProductRepository : IProductRepository
     {
         private readonly IDatabase _database;
 
@@ -16,9 +17,17 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
-        public void Create(ProductModel company)
+        public void Create(string name, double pricePerKg)
         {
-            _database.Products.Add(company);
+            var id = _database.Products.Last().Id + 1;
+
+            var product = new ProductModel
+            {
+                Id = id,
+                Name = name,
+                PricePerKg = pricePerKg
+            };
+            _database.Products.Add(product);
         }
 
         public List<ProductModel> GetAll()

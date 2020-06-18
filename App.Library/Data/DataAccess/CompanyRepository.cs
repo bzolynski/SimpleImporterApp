@@ -1,4 +1,5 @@
 ﻿using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
-    public class CompanyRepository : IRepository<CompanyModel>
+    public class CompanyRepository : ICompanyRepository
     {
         private readonly IDatabase _database;
 
@@ -16,8 +17,19 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
-        public void Create(CompanyModel company)
+        public void Create(string name, string country, string adress)
         {
+
+            var id = _database.Companies.Last().Id + 1;
+
+            var company = new CompanyModel
+            {
+                Id = id,
+                Name = name,
+                Country = country,
+                Adress = adress
+            };
+
             _database.Companies.Add(company);
         }
 
