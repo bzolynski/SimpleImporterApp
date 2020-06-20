@@ -10,6 +10,6 @@ namespace App.Library.Models
         // Nazwa produktu
         public string Name { get; set; }
         // Cena za kilogram produktu
-        public double PricePerKg { get; set; }
+        public decimal PricePerKg { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace App.Library.Models
     {
         
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { private get; set; }
+        public string LastName { private get; set; }
         public string Email { get; set; }
         public int CompanyId { get; set; }
         

@@ -7,8 +7,6 @@ namespace App.Library.Interfaces
 {
     public interface ISampleData
     {
-        void PopulateSellers();
-        void PopulateCompanies();
-        void PopulateProducts();
+        void Initialize();
     }
 }

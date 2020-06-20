@@ -11,5 +11,6 @@ namespace App.Library.Interfaces
         List<OrderModel> Orders { get; set; }
         List<ProductModel> Products { get; set; }
         List<SellerModel> Sellers { get; set; }
+        List<OrderedProductModel> OrderedProducts { get; set; }
     }
 }

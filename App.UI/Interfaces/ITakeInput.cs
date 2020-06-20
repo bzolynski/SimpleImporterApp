@@ -8,7 +8,7 @@ namespace App.UI.Interfaces
     {
         int MenuInput();
         int IntInput();
-        double DoubleInput();
+        decimal DecimalInput();
         string StringInput();
     }
 }

@@ -25,6 +25,7 @@ namespace App.UI.Menu
 
         public void Initialize()
         {
+            Console.Clear();
             MainText();
             MenuSwitch();
         }
@@ -47,21 +48,26 @@ namespace App.UI.Menu
             switch (option)
             {
                 case (1):
+                    Console.Clear();
+
                     _sellerMenu.Initialize();
                     Initialize();
                     break;
 
                 case (2):
+                    Console.Clear();
                     _companyMenu.Initialize();
                     Initialize();
                     break;
 
                 case (3):
+                    Console.Clear();
                     _productMenu.Initialize();
                     Initialize();
                     break;
 
                 case (4):
+                    Console.Clear();
                     _orderMenu.Initialize();
                     Initialize();
                     break;

@@ -24,9 +24,7 @@ namespace App.UI
 
         public void InitializeDatabase()
         {
-            _sampleData.PopulateCompanies();
-            _sampleData.PopulateProducts();
-            _sampleData.PopulateSellers();
+            _sampleData.Initialize();
         }
 
         public void Run()

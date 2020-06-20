@@ -7,11 +7,12 @@ namespace App.Library.Models
     public class OrderModel
     {
         public int Id { get; set; }
-        // Ilość zamówionego produktu
-        public double Quantity { get; set; }
-        // Id produktów
-        public List<int> ProductIds { get; set; }
-        // Id sprzedawcy
+        // Ilość zamówionego produktu        
         public int SellerId { get; set; }
+        public string OrderDate
+        {
+            get { return DateTime.Now.ToShortDateString(); }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using App.Library.Interfaces;
+﻿using App.Library.Data.Dtos;
+using App.Library.Interfaces;
 using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using Newtonsoft.Json;
@@ -21,7 +22,7 @@ namespace App.Library.Data.DataAccess
 
         public void Create(string firstName, string lastName, string email, int companyId)
         {
-            var id = _database.Sellers.Last().Id + 1;
+            var id = _database.Sellers.Count > 0 ? _database.Sellers.Last().Id + 1 : 0;
 
             var seller = new SellerModel
             {
@@ -36,19 +37,51 @@ namespace App.Library.Data.DataAccess
             
         }
 
-        public List<SellerModel> GetAll()
+        public List<SellerDto> GetAll()
         {
-            return _database.Sellers;
+            var sellers = _database.Sellers;
+
+            var sellerDtoList = new List<SellerDto>();
+
+            foreach (var seller in sellers)
+            {
+                var sellersCompany = _database.Companies.FirstOrDefault(x => x.Id == seller.CompanyId);
+                
+                var sellerDto = new SellerDto
+                {
+                    Id = seller.Id,
+                    FullName = seller.FullName,
+                    Email = seller.Email,
+                    CompanyName = sellersCompany != null ? sellersCompany.Name : "DELETED"
+                };
+
+                sellerDtoList.Add(sellerDto);
+            }
+
+            return sellerDtoList;
         }
 
-        public SellerModel Get(int id)
+        public SellerDto Get(int id)
         {
-            return _database.Sellers.FirstOrDefault(x => x.Id == id);
+            var seller = _database.Sellers.FirstOrDefault(x => x.Id == id);
+            var sellersCompany = _database.Companies.FirstOrDefault(x => x.Id == seller.CompanyId);
+
+            var sellerDto = new SellerDto
+            {
+                Id = seller.Id,
+                FullName = seller.FullName,
+                Email = seller.Email,
+                CompanyName = sellersCompany.Name
+            };
+
+            return sellerDto;
+
         }
 
         public void Delete(int id)
         {
             _database.Sellers.Remove(_database.Sellers.FirstOrDefault(x => x.Id == id));
+            
         }
 
 

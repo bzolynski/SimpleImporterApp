@@ -1,4 +1,5 @@
-﻿using App.Library.Interfaces.Repository;
+﻿using App.Library.Interfaces;
+using App.Library.Interfaces.Repository;
 using App.UI.Interfaces;
 using ConsoleTables;
 using System;
@@ -10,12 +11,16 @@ namespace App.UI.Menu
     public class SellerMenu
     {
         private readonly ITakeInput _takeInput;
-        private readonly ISellerRepository _repository;
+        private readonly ISellerRepository _sellerRepository;
+        private readonly IValidation _validation;
+        private readonly IPrintTables _printTables;
 
-        public SellerMenu(ITakeInput takeInput, ISellerRepository repository)
+        public SellerMenu(ITakeInput takeInput, ISellerRepository sellerRepository, IValidation validation, IPrintTables printTables)
         {
             _takeInput = takeInput;
-            _repository = repository;
+            _sellerRepository = sellerRepository;
+            _validation = validation;
+            _printTables = printTables;
         }
         public void Initialize()
         {
@@ -38,36 +43,55 @@ namespace App.UI.Menu
             switch (option)
             {
                 case (1):
-                    var sellers = _repository.GetAll();
-                    // TODO: dodać nazwę firmy
-                    var sellersTable = new ConsoleTable("Id", "Full Name", "Email");
-                    foreach (var sell in sellers)
-                    {
-                        sellersTable.AddRow(sell.Id, sell.FullName, sell.Email);
-                    }
-                    sellersTable.Write();
-                    Console.WriteLine();
+                    Console.Clear();
+
+                    _printTables.SellersTable();
+
                     Initialize();
                     break;
 
                 case (2):
+                    Console.Clear();
                     Console.Write("Podaj imię: ");
                     var firstName = _takeInput.StringInput();
                     Console.Write("Podaj nazwisko: ");
                     var lastName = _takeInput.StringInput();
-                    Console.Write("Podaj email: ");
-                    var email = _takeInput.StringInput();
-                    Console.Write("Podaj id firmy: ");
-                    var companyId = _takeInput.IntInput();
 
-                    _repository.Create(firstName, lastName, email, companyId);
+                    string email;
+                    Console.Write("Podaj email: ");
+                    do
+                    {
+                        email = _takeInput.StringInput();
+
+                    } while (!_validation.IsValidEmail(email));
+
+                    _printTables.CompaniesTable();
+
+                    int companyId;
+                    do
+                    {
+                        Console.Write("Podaj istniejące id firmy: ");
+                        companyId = _takeInput.IntInput();
+
+                    } while (!_validation.DoesCompanyExist(companyId));
+
+                    _sellerRepository.Create(firstName, lastName, email, companyId);
+                    Console.Clear();
                     Initialize();
                     break;
 
                 case (3):
+                    Console.Clear();
+                    _printTables.SellersTable();
                     Console.Write("Podaj id sprzedawcy do usunięcia: ");
                     var idToDel = _takeInput.IntInput();
-                    _repository.Delete(idToDel);
+
+                    Console.WriteLine("Aby usunąć wprowadź 1, aby anulować wprowadź dowolną liczbę");
+                    var input = _takeInput.IntInput();
+                    if (input == 1)
+                        _sellerRepository.Delete(idToDel);
+
+                    Console.Clear();
                     Initialize();
                     break;
 

@@ -20,7 +20,7 @@ namespace App.Library.Data.DataAccess
         public void Create(string name, string country, string adress)
         {
 
-            var id = _database.Companies.Last().Id + 1;
+            var id = _database.Companies.Count > 0 ? _database.Companies.Last().Id + 1 : 0;
 
             var company = new CompanyModel
             {

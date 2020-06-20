@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.UI
+namespace App.UI.Services
 {
     public class TakeInput : ITakeInput
     {
@@ -28,18 +28,18 @@ namespace App.UI
                     Console.Write("Błąd! Podaj liczbę: ");
 
 
-            } while (true);            
+            } while (true);
         }
 
-        public double DoubleInput()
+        public decimal DecimalInput()
         {
             do
             {
-                double number = -1.0;
+                decimal number = -1.0M;
                 Console.Write("Wpisz liczbę: ");
                 var input = Console.ReadLine();
 
-                if (double.TryParse(input, out number))
+                if (decimal.TryParse(input, out number))
                     return number;
                 else
                     Console.Write("Błąd! Podaj liczbę: ");
@@ -51,13 +51,13 @@ namespace App.UI
         public string StringInput()
         {
             do
-            {                
+            {
                 var input = Console.ReadLine();
 
                 if (!string.IsNullOrWhiteSpace(input))
                     return input;
                 else
-                    Console.WriteLine("Pole nie może być psuste. Wpisz jeszcze raz");
+                    Console.WriteLine("Pole nie może być puste. Wpisz jeszcze raz");
 
             } while (true);
         }

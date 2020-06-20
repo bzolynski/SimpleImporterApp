@@ -7,6 +7,6 @@ namespace App.Library.Interfaces.Repository
 {
     public interface IProductRepository : IRepository<ProductModel>
     {
-        void Create(string name, double pricePerKg);
+        void Create(string name, decimal pricePerKg);
     }
 }

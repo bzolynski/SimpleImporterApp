@@ -17,9 +17,9 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
-        public void Create(string name, double pricePerKg)
+        public void Create(string name, decimal pricePerKg)
         {
-            var id = _database.Products.Last().Id + 1;
+            var id = _database.Products.Count > 0 ? _database.Products.Last().Id + 1 : 0;
 
             var product = new ProductModel
             {
@@ -43,6 +43,9 @@ namespace App.Library.Data.DataAccess
         public void Delete(int id)
         {
             _database.Products.Remove(_database.Products.FirstOrDefault(x => x.Id == id));
+
+            _database.OrderedProducts.RemoveAll(x => x.ProductId == id);
+            
         }
     }
 }

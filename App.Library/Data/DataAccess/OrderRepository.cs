@@ -1,4 +1,5 @@
-﻿using App.Library.Interfaces;
+﻿using App.Library.Data.Dtos;
+using App.Library.Interfaces;
 using App.Library.Interfaces.Repository;
 using App.Library.Models;
 using System;
@@ -17,24 +18,61 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
-        public void Create(OrderModel company)
+        public int Create(int sellerId)
         {
-            _database.Orders.Add(company);
+
+            var id = _database.Orders.Count > 0 ? _database.Orders.Last().Id + 1 : 0;
+
+            var order = new OrderModel
+            {
+                Id = id,
+                SellerId = sellerId
+            };
+
+            _database.Orders.Add(order);
+            return id;
         }
 
-        public List<OrderModel> GetAll()
+        public List<OrderDto> GetAll()
         {
-            return _database.Orders;
+
+            var orders = _database.Orders;
+
+            var orderDtoList = new List<OrderDto>();
+
+            if (orders.Count > 0)
+            {
+                foreach (var order in orders)
+                {
+                    var seller = _database.Sellers.FirstOrDefault(x => x.Id == order.SellerId);
+                    
+                    var orderDto = new OrderDto
+                    {
+                        Id = order.Id,
+                        OrderDate = order.OrderDate,
+                        SellerName = seller != null ? seller.FullName : "DELETED",
+                    };
+
+                    orderDtoList.Add(orderDto);
+                }
+            }
+            
+
+            return orderDtoList;
         }
 
-        public OrderModel Get(int id)
+        public OrderDto Get(int id)
         {
-            return _database.Orders.FirstOrDefault(x => x.Id == id);
+            throw new Exception();
+
         }
 
         public void Delete(int id)
         {
             _database.Orders.Remove(_database.Orders.FirstOrDefault(x => x.Id == id));
+            _database.OrderedProducts.RemoveAll(x => x.OrderId == id);
         }
+
+        
     }
 }

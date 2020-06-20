@@ -11,11 +11,13 @@ namespace App.UI.Menu
     {
         private readonly ITakeInput _takeInput;
         private readonly IProductRepository _repository;
+        private readonly IPrintTables _printTables;
 
-        public ProductMenu(ITakeInput takeInput, IProductRepository repository)
+        public ProductMenu(ITakeInput takeInput, IProductRepository repository, IPrintTables printTables)
         {
             _takeInput = takeInput;
             _repository = repository;
+            _printTables = printTables;
         }
         public void Initialize()
         {
@@ -38,32 +40,39 @@ namespace App.UI.Menu
             switch (option)
             {
                 case (1):
-                    var products = _repository.GetAll();
-                    var companiesTable = new ConsoleTable("Id", "Name", "Price/kg");
-                    foreach (var prod in products)
-                    {
-                        companiesTable.AddRow(prod.Id, prod.Name, prod.PricePerKg);
-                    }
-                    companiesTable.Write();
-                    Console.WriteLine();
+                    Console.Clear();
+                    _printTables.ProductsTable();
+
                     Initialize();
                     break;
 
                 case (2):
+                    Console.Clear();
                     Console.Write("Podaj nazwę produktu: ");
                     var name = _takeInput.StringInput();
 
                     Console.Write("Podaj cenę za kilogram: ");
-                    var price = _takeInput.DoubleInput();
+                    var price = _takeInput.DecimalInput();
 
                     _repository.Create(name, price);
+                    Console.Clear();
                     Initialize();
                     break;
 
                 case (3):
+                    Console.Clear();
+                    _printTables.ProductsTable();
                     Console.Write("Podaj id produktu do usunięcia: ");
                     var idToDel = _takeInput.IntInput();
-                    _repository.Delete(idToDel);
+
+                    Console.WriteLine("Czy jesteś pewny, że chcesz usunąć ten produkt? Po usunięciu produktu w szczegółach zamówienia mogą pojawić się błędy.");
+                    Console.WriteLine("Aby usunąć wprowadź 1, aby anulować wprowadź dowolną liczbę");
+                    var input = _takeInput.IntInput();
+                    if (input == 1)
+                        _repository.Delete(idToDel);
+                    
+                    
+                    Console.Clear();
                     Initialize();
                     break;
 

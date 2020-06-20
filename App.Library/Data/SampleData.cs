@@ -12,17 +12,36 @@ namespace App.Library.Data
         {
             _database = database;
         }
-        public void PopulateSellers()
+
+        public void Initialize()
+        {
+            PopulateSellers();
+            PopulateCompanies();
+            PopulateProducts();
+
+            _database.Orders = new List<OrderModel>();
+            _database.OrderedProducts = new List<OrderedProductModel>();
+
+        }
+        private void PopulateSellers()
         {
             List<SellerModel> sellers = new List<SellerModel>
             {
+                new SellerModel
+                {
+                    Id = 0,
+                    FirstName = "Carla",
+                    LastName = "Frank",
+                    Email = "carla.frank@gmail.com",
+                    CompanyId = 2
+                },
                 new SellerModel
                 {
                      Id = 1,
                      FirstName = "Tom",
                      LastName = "Smith",
                      Email = "tom.smith@gmail.com",
-                     CompanyId = 1
+                     CompanyId = 0
                 },
                 new SellerModel
                 {
@@ -30,7 +49,7 @@ namespace App.Library.Data
                     FirstName = "Bob",
                     LastName = "Long",
                     Email = "bob.long@gmail.com",
-                    CompanyId = 2
+                    CompanyId = 1
                 },
                 new SellerModel
                 {
@@ -38,7 +57,7 @@ namespace App.Library.Data
                     FirstName = "Gabierlla",
                     LastName = "Stracciatella",
                     Email = "gabierlla.stracciatella@gmail.com",
-                    CompanyId = 2
+                    CompanyId = 1
                 },
                 new SellerModel
                 {
@@ -46,25 +65,25 @@ namespace App.Library.Data
                     FirstName = "Guseppe",
                     LastName = "Cinque",
                     Email = "guseppe.cinque@gmail.com",
-                    CompanyId = 1
+                    CompanyId = 0
                 },
-                new SellerModel
-                {
-                    Id = 5,
-                    FirstName = "Carla",
-                    LastName = "Frank",
-                    Email = "carla.frank@gmail.com",
-                    CompanyId = 3
-                }
+                
             };
 
             _database.Sellers = sellers;
         }
 
-        public void PopulateCompanies()
+        private void PopulateCompanies()
         {
             List<CompanyModel> companies = new List<CompanyModel> 
-            { 
+            {
+                new CompanyModel
+                {
+                    Id = 0,
+                    Name = "Fruit Italy",
+                    Country = "Włochy",
+                    Adress = "Piazza Don Luigi Sturzo 18, Avellino"
+                },
                 new CompanyModel
                 {
                     Id = 1,
@@ -79,58 +98,53 @@ namespace App.Library.Data
                     Country = "Niderlandy",
                     Adress = "Tinbergenlaan 48, Zwolle"
                 },
-                new CompanyModel
-                {
-                    Id = 3,
-                    Name = "Fruit Italy",
-                    Country = "Włochy",
-                    Adress = "Piazza Don Luigi Sturzo 18, Avellino"
-                }
+                
             };
 
             _database.Companies = companies;
         }
 
-        public void PopulateProducts()
+        private void PopulateProducts()
         {
             List<ProductModel> products = new List<ProductModel>
             {
                 new ProductModel
                 {
+                    Id = 0,
+                    Name = "Arbuz",
+                    PricePerKg = 3.99M
+                },
+                new ProductModel
+                {
                     Id = 1,
                     Name = "Pomarańcza",
-                    PricePerKg = 12.3
+                    PricePerKg = 12.3M
                 },
                 new ProductModel
                 {
                     Id = 2,
                     Name = "Truskawka",
-                    PricePerKg = 6.55
+                    PricePerKg = 6.55M
                 },
                 new ProductModel
                 {
                     Id = 3,
                     Name = "Jabłko",
-                    PricePerKg = 21.37
+                    PricePerKg = 21.37M
                 },
                 new ProductModel
                 {
                     Id = 4,
                     Name = "Ziemniak",
-                    PricePerKg = 1.95
+                    PricePerKg = 1.95M
                 },
                 new ProductModel
                 {
                     Id = 5,
                     Name = "Winogrono",
-                    PricePerKg = 13.09
+                    PricePerKg = 13.09M
                 },
-                new ProductModel
-                {
-                    Id = 6,
-                    Name = "Arbuz",
-                    PricePerKg = 3.99
-                }
+                
 
             };
 
