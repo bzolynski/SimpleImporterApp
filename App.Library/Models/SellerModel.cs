@@ -4,9 +4,11 @@ using System.Text;
 
 namespace App.Library.Models
 {
+    /// <summary>
+    /// Model dla sprzedawcy
+    /// </summary>
     public class SellerModel
-    {
-        
+    {        
         public int Id { get; set; }
         public string FirstName { private get; set; }
         public string LastName { private get; set; }
@@ -15,7 +17,7 @@ namespace App.Library.Models
         
         public string FullName
         {
-            get { return $"{ FirstName } { LastName }"; }
+            get { return $"{ FirstName.Trim() } { LastName.Trim() }"; }
         }
     }
 }

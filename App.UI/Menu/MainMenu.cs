@@ -5,6 +5,9 @@ using System.Text;
 
 namespace App.UI.Menu
 {
+    /// <summary>
+    /// Główne menu. Za pomocą swich'a można wybrać podmenu
+    /// </summary>
     public class MainMenu
     {
         private readonly ITakeInput _takeInput;

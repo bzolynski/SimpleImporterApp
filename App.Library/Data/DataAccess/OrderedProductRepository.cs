@@ -9,6 +9,9 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
+    /// <summary>
+    /// Repository do zarządzania zamówionymi produktami
+    /// </summary>
     public class OrderedProductRepository : IOrderedProductRepository
     {
         private readonly IDatabase _database;
@@ -17,6 +20,13 @@ namespace App.Library.Data.DataAccess
         {
             _database = database;
         }
+
+        /// <summary>
+        /// Tworzy zamówiony produkt
+        /// </summary>
+        /// <param name="orderId"> Id zamówienia </param>
+        /// <param name="productId"> Id zamówionego produktu </param>
+        /// <param name="quantity"> Ilość produktu w kg </param>
         public void Create(int orderId, int productId, decimal quantity)
         {
             var id = _database.OrderedProducts.Count > 0 ? _database.OrderedProducts.Last().Id + 1 : 0;
@@ -33,6 +43,11 @@ namespace App.Library.Data.DataAccess
 
         }
 
+        /// <summary>
+        /// Zwraca zamówienie o podanym Id
+        /// </summary>
+        /// <param name="orderId"> Id zamówienia </param>
+        /// <returns> Zamówienie o podanym id </returns>
         public List<OrderedProductDto> Get(int orderId)
         {
             var orderedProducts = _database.OrderedProducts.Where(x => x.OrderId == orderId);

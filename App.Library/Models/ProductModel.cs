@@ -4,12 +4,13 @@ using System.Text;
 
 namespace App.Library.Models
 {
+    /// <summary>
+    /// Model dla produktu
+    /// </summary>
     public class ProductModel
     {
         public int Id { get; set; }
-        // Nazwa produktu
         public string Name { get; set; }
-        // Cena za kilogram produktu
         public decimal PricePerKg { get; set; }
     }
 }

@@ -9,9 +9,9 @@ namespace App.UI.Interfaces
     public interface IPrintTables
     {
         void SellersTable();
-        void CompaniesTable();
+        int CompaniesTable();
         void OrdersTable();
-        void ProductsTable();
+        int ProductsTable();
         void OrderDetailsTable(int id);
     }
 }

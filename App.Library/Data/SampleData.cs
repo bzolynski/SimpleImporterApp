@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace App.Library.Data
 {
+    /// <summary>
+    /// Ta klasa inicjalizuje przykładowe dane do "bazy"
+    /// </summary>
     public class SampleData : ISampleData
     {
         private readonly IDatabase _database;

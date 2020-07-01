@@ -9,6 +9,9 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
+    /// <summary>
+    /// Repository do zarządzania zamównieniami
+    /// </summary>
     public class OrderRepository : IOrderRepository
     {
         private readonly IDatabase _database;
@@ -17,7 +20,11 @@ namespace App.Library.Data.DataAccess
         {
             _database = database;
         }
-
+        /// <summary>
+        /// Tworzy nowe zamówienie
+        /// </summary>
+        /// <param name="sellerId"> ID sprzedawcy </param>
+        /// <returns> Zwraca id nowo powstałego zamówienia </returns>
         public int Create(int sellerId)
         {
 
@@ -33,6 +40,10 @@ namespace App.Library.Data.DataAccess
             return id;
         }
 
+        /// <summary>
+        /// Zwraca wszystkie zamówienia
+        /// </summary>
+        /// <returns> Zamówienia </returns>
         public List<OrderDto> GetAll()
         {
 
@@ -67,6 +78,10 @@ namespace App.Library.Data.DataAccess
 
         }
 
+        /// <summary>
+        /// Usuwa zamówienie
+        /// </summary>
+        /// <param name="id"> Id zamówienia do usunięcia </param>
         public void Delete(int id)
         {
             _database.Orders.Remove(_database.Orders.FirstOrDefault(x => x.Id == id));

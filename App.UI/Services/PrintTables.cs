@@ -9,6 +9,9 @@ using System.Text;
 
 namespace App.UI.Services
 {
+    /// <summary>
+    /// Klasa zawierająca metody drukujące tabele dla poszczególnych danych. Do drukowania tabel użyty został NuGet - ConsoleTables. Link do GitHuba: https://github.com/khalidabuhakmeh/ConsoleTables
+    /// </summary>
     public class PrintTables : IPrintTables
     {
         private readonly ISellerRepository _sellerRepository;
@@ -38,7 +41,7 @@ namespace App.UI.Services
             Console.WriteLine();
         }
 
-        public void CompaniesTable()
+        public int CompaniesTable()
         {
             var companies = _companyRepository.GetAll();
 
@@ -49,6 +52,7 @@ namespace App.UI.Services
             }
             companiesTable.Write();
             Console.WriteLine();
+            return companiesTable.Rows.Count;
         }
 
         public void OrdersTable()
@@ -82,7 +86,7 @@ namespace App.UI.Services
             Console.WriteLine();
         }
 
-        public void ProductsTable()
+        public int ProductsTable()
         {
             var products = _productRepository.GetAll();
 
@@ -93,6 +97,8 @@ namespace App.UI.Services
             }
             productsTable.Write();
             Console.WriteLine();
+
+            return productsTable.Rows.Count;
         }
     }
 }

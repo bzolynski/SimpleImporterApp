@@ -11,6 +11,9 @@ using System.Text;
 
 namespace App.Library.Data.DataAccess
 {
+    /// <summary>
+    /// Repository do zarządzania sprzedawcami
+    /// </summary>
     public class SellerRepository : ISellerRepository
     {
         private readonly IDatabase _database;
@@ -20,6 +23,13 @@ namespace App.Library.Data.DataAccess
             _database = database;
         }
 
+        /// <summary>
+        /// Tworzy nowego sprzedawcę
+        /// </summary>
+        /// <param name="firstName"> Imię sprzedawcy </param>
+        /// <param name="lastName"> Nazwisko sprzedawcy </param>
+        /// <param name="email"> Email sprzedawcy</param>
+        /// <param name="companyId"> Id firmy w której sprzedawca pracuje </param>
         public void Create(string firstName, string lastName, string email, int companyId)
         {
             var id = _database.Sellers.Count > 0 ? _database.Sellers.Last().Id + 1 : 0;
@@ -37,6 +47,10 @@ namespace App.Library.Data.DataAccess
             
         }
 
+        /// <summary>
+        /// Zwraca listę wszystkich sprzedawców
+        /// </summary>
+        /// <returns> Lista sprzedawców </returns>
         public List<SellerDto> GetAll()
         {
             var sellers = _database.Sellers;
@@ -61,6 +75,11 @@ namespace App.Library.Data.DataAccess
             return sellerDtoList;
         }
 
+        /// <summary>
+        /// Zwraca sprzedawcę o danym Id
+        /// </summary>
+        /// <param name="id"> Id sprzedawcy </param>
+        /// <returns> Sprzedawca </returns>
         public SellerDto Get(int id)
         {
             var seller = _database.Sellers.FirstOrDefault(x => x.Id == id);
@@ -78,6 +97,10 @@ namespace App.Library.Data.DataAccess
 
         }
 
+        /// <summary>
+        /// Usuwa sprzedawcę o podanym Id
+        /// </summary>
+        /// <param name="id"> Id sprzedawcy </param>
         public void Delete(int id)
         {
             _database.Sellers.Remove(_database.Sellers.FirstOrDefault(x => x.Id == id));

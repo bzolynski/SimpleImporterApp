@@ -65,7 +65,13 @@ namespace App.UI.Menu
 
                     } while (!_validation.IsValidEmail(email));
 
-                    _printTables.CompaniesTable();
+                    if (_printTables.CompaniesTable() < 1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Brak firm w bazie. Najpierw dodaj firmę potem sprzedawcę!!!\n");
+                        Initialize();
+                        break;
+                    }                    
 
                     int companyId;
                     do

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace App.Library.Data.Dtos
 {
+    /// <summary>
+    /// Data transfer object dla zamówionych produktów
+    /// </summary>
     public class OrderedProductDto
     {
         public string Name { get; set; }

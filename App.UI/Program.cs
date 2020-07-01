@@ -10,6 +10,7 @@ namespace App.UI
     {
         static void Main(string[] args)
         {
+
             var container = DependencyInjection.Initialize();
             var startup = container.Resolve<IStartup>();
             startup.InitializeDatabase();

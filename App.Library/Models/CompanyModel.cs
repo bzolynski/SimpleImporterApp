@@ -4,12 +4,13 @@ using System.Text;
 
 namespace App.Library.Models
 {
+    /// <summary>
+    /// Model dla firmy
+    /// </summary>
     public class CompanyModel
     {   
         public int Id { get; set; }
-        // Nazwa firmy
         public string Name { get; set; }
-        // Lokalizacja: Kraj i adres
         public string Country { get; set; }
         public string Adress { get; set; }
     }

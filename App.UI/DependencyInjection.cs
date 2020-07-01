@@ -15,6 +15,9 @@ using System.Text;
 
 namespace App.UI
 {
+    /// <summary>
+    /// Tworzenie kontenera do dependency injection. Użyty kontener - AutoFac
+    /// </summary>
     public static class DependencyInjection
     {
         public static IContainer Initialize()

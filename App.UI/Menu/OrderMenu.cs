@@ -82,7 +82,13 @@ namespace App.UI.Menu
 
                     do
                     {
-                        _printTables.ProductsTable();
+                        if(_printTables.ProductsTable() < 1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Brak produktów w bazie. Najpierw dodaj produkty potem złóż zamówienie!!!\n");
+                            Initialize();
+                            break;
+                        }
                         int productId;
 
                         do

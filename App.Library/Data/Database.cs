@@ -6,6 +6,9 @@ using System.Text;
 
 namespace App.Library.Data
 {
+    /// <summary>
+    /// Przykładowa "baza danych"
+    /// </summary>
     public class Database : IDatabase
     {
         public List<CompanyModel> Companies { get; set; }
